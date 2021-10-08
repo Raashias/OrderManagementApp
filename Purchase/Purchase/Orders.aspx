@@ -11,7 +11,7 @@
         <div>
              <table> 
                 <tr>
-                    <td>Order_NO</td>
+                    <td>Order_No</td>
                     <td>
                         <asp:Label ID="lblOrderNo" runat="server" Text="Label"></asp:Label></td> 
                 </tr>
@@ -34,17 +34,18 @@
                  <tr>
                      <td>Salesman_ID</td>
                      <td>
-                         <asp:TextBox ID="txtSalesmanID" runat="server"></asp:TextBox></td>
+                         <asp:DropDownList ID="DropDownListSalesman_ID" runat="server"></asp:DropDownList></td>
                  </tr>
                 <tr>
                     <td></td><td>
                         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
                         <asp:Button ID="btnReset" runat="server" Text="Reset" />
+                        <asp:Button ID="Button1" runat="server" OnClick="btnUpdate_Click" Text="Update" />
                     </td>
                 </tr>
             </table>
             <div>
-                <asp:GridView ID="gvOrderDetails" runat="server" AutoGenerateColumns="False">
+                <asp:GridView ID="gvOrderDetails" runat="server" AutoGenerateColumns="False" OnRowCommand="gvOrderDetails_RowCommand" OnRowDeleting="gvOrderDetails_RowDeleting" OnRowEditing="gvOrderDetails_RowEditing">
                     <Columns>
                         <asp:BoundField DataField="Ord_no" HeaderText="OrderNo" />
                         <asp:BoundField DataField="Purch_Amt" HeaderText="Purchase_Amt" />
@@ -53,12 +54,12 @@
                         <asp:BoundField DataField="Salesman_ID" HeaderText="Salesman_ID" />
                         <asp:TemplateField HeaderText="Edit">
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton1" runat="server">Edit</asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Edit" CommandArgument='<%# Eval("Ord_no")%>'>Edit</asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Delete">
                             <ItemTemplate>
-                                <asp:LinkButton ID="LinkButton2" runat="server">Delete</asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Ord_no")%>'>Delete</asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

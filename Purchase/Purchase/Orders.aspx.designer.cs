@@ -60,13 +60,13 @@ namespace Purchase
         protected global::System.Web.UI.WebControls.DropDownList DropDownListCustomer_ID;
 
         /// <summary>
-        /// txtSalesmanID control.
+        /// DropDownListSalesman_ID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSalesmanID;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListSalesman_ID;
 
         /// <summary>
         /// btnSave control.
@@ -85,6 +85,15 @@ namespace Purchase
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
+
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
         /// gvOrderDetails control.

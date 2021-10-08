@@ -32,7 +32,7 @@ namespace Purchase
         public DataTable Getsalesmanid(int Salesman_ID)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("select * from salesman where Salesman_ID = "+ Salesman_ID + "", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("select * from salesman where Salesman_ID = " + Salesman_ID + "", sqlConnection);
             sqlConnection.Open();
             SqlDataReader dr = sqlCommand.ExecuteReader();
             DataTable dt = new DataTable();
@@ -44,16 +44,16 @@ namespace Purchase
         public DataTable Updatesalesman(int Salesman_ID, string Name, string City, string commission)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("Update salesman set Name = '" + Name+ "', City ='"+City+"', Commission = '"+commission+"' where Salesman_ID = "+Salesman_ID+"", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("Update salesman set Name = '" + Name + "', City ='" + City + "', Commission = '" + commission + "' where Salesman_ID = " + Salesman_ID + "", sqlConnection);
             sqlConnection.Open();
             SqlDataReader dr = sqlCommand.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
             sqlConnection.Close();
             return dt;
-            
+
         }
-        
+
         public void Deletesalesman(int Salesman_ID)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
@@ -67,13 +67,13 @@ namespace Purchase
         //Customer
 
         //Step3
-        public void InsertCustomer(int Salesman_ID,string CustomerName, string Customercity, string CustomerGrade)
+        public void InsertCustomer(int Salesman_ID, string CustomerName, string Customercity, string CustomerGrade)
         {
             //string insertQuery = "insert into customer values(" + Customer_ID + "," + Salesman_ID + ",'" + CustomerName + "','" + Customercity + "','" + CustomerGrade + "')";
             //ExecuteQry(insertQuery);
             //return "Inserted";
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("insert into customer values( " + Salesman_ID + ", '" + CustomerName + "','" + Customercity + "','"+ CustomerGrade + "')", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("insert into customer values( " + Salesman_ID + ", '" + CustomerName + "','" + Customercity + "','" + CustomerGrade + "')", sqlConnection);
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
@@ -86,7 +86,7 @@ namespace Purchase
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(insertQuery, sqlConnection);
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
-         
+
         }
 
         public DataTable GetCustomer()
@@ -122,7 +122,7 @@ namespace Purchase
             sqlConnection.Close();
         }
 
-        public DataTable UpdateCustomer(int Customer_ID,int Salesman_ID, string Name, string City, string grade)
+        public DataTable UpdateCustomer(int Customer_ID, int Salesman_ID, string Name, string City, string grade)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
             SqlCommand sqlCommand = new SqlCommand("Update customer set Cust_Name = '" + Name + "', City ='" + City + "', Grade = '" + grade + "' where Customer_ID = " + Customer_ID + "", sqlConnection);
@@ -136,13 +136,13 @@ namespace Purchase
         }
 
 
-        public void InsertOrder( string PurchaseAmt, string OrdDate, string Customer_ID, string Salesman_ID)
+        public void InsertOrder(string PurchaseAmt, string OrdDate, string Customer_ID, int Salesman_ID)
         {
             //string insertQuery = "insert into customer values(" + Customer_ID + "," + Salesman_ID + ",'" + CustomerName + "','" + Customercity + "','" + CustomerGrade + "')";
             //ExecuteQry(insertQuery);
             //return "Inserted";
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
-            SqlCommand sqlCommand = new SqlCommand("insert into orders values( '" + PurchaseAmt + "', '" + OrdDate + "'," + Customer_ID + "," +Salesman_ID  + ")", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("insert into orders(Purch_Amt,Ord_Date,Customer_ID,Salesman_ID) values( " + PurchaseAmt + ", '" + OrdDate + "'," + Customer_ID + "," + Salesman_ID + ")", sqlConnection);
             sqlConnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
@@ -160,6 +160,38 @@ namespace Purchase
             sqlConnection.Close();
             return dt;
         }
-    }
 
+        public DataTable GetOrderbyID(int Order_No)
+        {
+            SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
+            SqlCommand sqlCommand = new SqlCommand("select * from orders where Ord_No = " + Order_No + "", sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            sqlConnection.Close();
+            return dt;
+        }
+        public void DeleteOrder(int Order_No)
+        {
+            SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
+            SqlCommand sqlCommand = new SqlCommand("Delete from orders where Ord_No = " + Order_No + "", sqlConnection);
+            sqlConnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
+        public DataTable UpdateOrder(int Order_No, string Purch_Amt, string Ord_date, string Customer_ID, int Salesman_ID)
+        {
+            SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
+            SqlCommand sqlCommand = new SqlCommand("Update orders set Purch_Amt = '" + Purch_Amt + "', Ord_Date ='" + Ord_date + "', Customer_ID = '" + Customer_ID + "', Salesman_ID = " + Salesman_ID + " where Ord_No = " + Order_No + "", sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader dr = sqlCommand.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            sqlConnection.Close();
+            return dt;
+
+        }
+
+    }
 }
