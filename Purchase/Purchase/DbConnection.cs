@@ -136,7 +136,7 @@ namespace Purchase
         }
 
 
-        public void InsertOrder(string PurchaseAmt, string OrdDate, string Customer_ID, int Salesman_ID)
+        public void InsertOrder(string PurchaseAmt, DateTime OrdDate, string Customer_ID, int Salesman_ID)
         {
             //string insertQuery = "insert into customer values(" + Customer_ID + "," + Salesman_ID + ",'" + CustomerName + "','" + Customercity + "','" + CustomerGrade + "')";
             //ExecuteQry(insertQuery);
@@ -180,7 +180,7 @@ namespace Purchase
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
         }
-        public DataTable UpdateOrder(int Order_No, string Purch_Amt, string Ord_date, string Customer_ID, int Salesman_ID)
+        public DataTable UpdateOrder(int Order_No, string Purch_Amt, DateTime Ord_date, string Customer_ID, int Salesman_ID)
         {
             SqlConnection sqlConnection = new SqlConnection("Data Source=LAPTOP-1EQ6NMD1;Initial Catalog=Purchase;Integrated Security=True");
             SqlCommand sqlCommand = new SqlCommand("Update orders set Purch_Amt = '" + Purch_Amt + "', Ord_Date ='" + Ord_date + "', Customer_ID = '" + Customer_ID + "', Salesman_ID = " + Salesman_ID + " where Ord_No = " + Order_No + "", sqlConnection);

@@ -42,7 +42,7 @@ namespace Purchase
             int Salesman_ID = Convert.ToInt32(DropDownListSalesman_ID.SelectedValue.ToString());
             var CustomerName = DropDownListCustomer_ID.SelectedItem.Text;
             DbConnection dbConnection = new DbConnection();
-            dbConnection.InsertOrder(txtPurchAmt.Text,txtOrderDate.Text, Convert.ToString(Customer_ID),Salesman_ID);
+            dbConnection.InsertOrder(txtPurchAmt.Text,Convert.ToDateTime(txtOrderDate.Text), Convert.ToString(Customer_ID),Salesman_ID);
             DbConnection obj = new DbConnection();
             DataTable dtOrderResult = obj.GetOrder();
             gvOrderDetails.DataSource = dtOrderResult;
@@ -76,7 +76,7 @@ namespace Purchase
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             DbConnection DbObj = new DbConnection();
-            DbObj.UpdateOrder(Convert.ToInt32(lblOrderNo.Text),txtPurchAmt.Text, txtOrderDate.Text,DropDownListCustomer_ID.Text,Convert.ToInt32(DropDownListSalesman_ID.Text));
+            DbObj.UpdateOrder(Convert.ToInt32(lblOrderNo.Text),txtPurchAmt.Text, Convert.ToDateTime(txtOrderDate.Text),DropDownListCustomer_ID.Text,Convert.ToInt32(DropDownListSalesman_ID.Text));
             DataTable dtOrderResult = DbObj.GetOrder();
             gvOrderDetails.DataSource = dtOrderResult;
             gvOrderDetails.DataBind();
